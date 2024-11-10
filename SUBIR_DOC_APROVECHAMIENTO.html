@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrega de Documentos</title>
+    <style>
+        body {
+            background-color: lightblue;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #e0ffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: green;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0; /* Espaciado vertical entre botones */
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #3e8e41;
+        }
+
+        input[type="file"] {
+            display: none; /* Ocultar el input de tipo file */
+        }
+
+        .file-name {
+            margin-top: 5px;
+            color: #333;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ENTREGAR DOCUMENTOS</h1>
+        <h2>BECA DE APROVECHAMIENTO</h2>
+        
+        <!-- Botón para cargar la Solicitud en PDF -->
+        <label class="button" for="documento1">IDENTIFICACION OFICIAL en PDF</label>
+        <input type="file" id="documento1" accept=".pdf" required onchange="updateFileName('documento1')">
+        <div id="file-name-1" class="file-name"></div>
+
+        <!-- Botón para cargar la Carga Horaria en PDF -->
+        <label class="button" for="documento2"> SOLICITUD en PDF</label>
+        <input type="file" id="documento2" accept=".pdf" required onchange="updateFileName('documento2')">
+        <div id="file-name-2" class="file-name"></div>
+        
+        <button class="button" onclick="uploadFiles()">Subir Documentos</button>
+    </div>
+
+    <script>
+        function updateFileName(inputId) {
+            const input = document.getElementById(inputId);
+            const fileNameDisplay = document.getElementById('file-name-' + (inputId === 'documento1' ? '1' : '2'));
+            if (input.files.length > 0) {
+                fileNameDisplay.textContent = 'Archivo seleccionado: ' + input.files[0].name;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        }
+
+        function uploadFiles() {
+            const file1 = document.getElementById('documento1').files[0];
+            const file2 = document.getElementById('documento2').files[0];
+
+            if (!file1 || !file2) {
+                alert('Por favor, selecciona ambos archivos PDF para subir.');
+                return;
+            }
+
+            // Aquí puedes agregar la lógica para subir los archivos al servidor
+            alert('Documentos subidos con éxito: ' + file1.name + ', ' + file2.name);
+        }
+    </script>
+</body>
+</html>
